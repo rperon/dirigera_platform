@@ -1,13 +1,21 @@
 {
     "domain": "dirigera_platform",
-    "name": "IKEA Dirigera Hub Integration",
-    "after_dependencies": ["http"],
-    "codeowners": ["@sanjoyg"],
+    "name": "IKEA Dirigera Hub Integration 2",
+    "after_dependencies": [
+        "http"
+    ],
+    "codeowners": [
+        "@rperon"
+    ],
     "config_flow": true,
-    "documentation": "https://github.com/sanjoyg/dirigera_platform",
+    "documentation": "https://github.com/rperon/dirigera_platform",
     "iot_class": "local_polling",
-    "issue_tracker": "https://github.com/sanjoyg/dirigera_platform",
-    "loggers": ["custom_components.dirigera_platform"],
-    "requirements": ["dirigera==1.2.1"],
+    "issue_tracker": "https://github.com/rperon/dirigera_platform",
+    "loggers": [
+        "custom_components.dirigera_platform"
+    ],
+    "requirements": [
+        "dirigera @ git+https://github.com/rperon/dirigera.git@feature/occupancy-light-sensor-MYGGSPRAY"
+    ],
     "version": "0.0.1"
 }

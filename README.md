@@ -1,46 +1,51 @@
-## IKEA Dirigera Hub Integration
-This custom components help integrating HomeAssistant with the new IKEA Dirigera hub. This integration is a scaffolding on the great work done by Nicolas Hilberg  at https://github.com/Leggin/dirigera
+## IKEA Dirigera Hub Integration 2
+
+This custom components help integrating HomeAssistant with the new IKEA Dirigera hub. This integration is a scaffolding on the great work done by Nicolas Hilberg at https://github.com/Leggin/dirigera
 
 Supports
-* Lights
-* Outlets
-* Open/Close Sensors
-* Motion Sensor
-* Environment Sensor
-* FYRTUR Blinds               
-* STYRBAR Remotes      
-* AirPurifier
-* STARKVIND AirPurifier
-* VALLHORN Motion Sensors
-* Scenes
-* BADRING Water Leak sensor:
-* SOMRIG Controllers - Included Events for Automation
+
+- Lights
+- Outlets
+- Open/Close Sensors
+- Motion Sensor
+- Environment Sensor
+- FYRTUR Blinds
+- STYRBAR Remotes
+- AirPurifier
+- STARKVIND AirPurifier
+- VALLHORN Motion Sensors
+- Scenes
+- BADRING Water Leak sensor:
+- SOMRIG Controllers - Included Events for Automation
 
 <a href="https://www.buymeacoffee.com/sanjoyg" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 Donation to above will got to [Samriddhi Foundation](https://www.samriddhifoundation.net/) an iniative by my teenage daughter to help the less fortunate.
 
 ## Pre-requisite
+
 1. Identify the IP of the gateway - Usually looking at the client list in your home router interface will give that.
 
 ## Installing
+
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=sanjoyg&repository=dirigera_platform&category=integration)
 
 - Like all add-on installation goto the "HACS" option in the left menu bar in home assistant
 - Select Integration and add custom repository and enter this repositoy
 
 ## Using the integration
-1. One you get to add integration and get to the configuration screen, the IP of the gateway will be requested. 
+
+1. One you get to add integration and get to the configuration screen, the IP of the gateway will be requested.
    **IMPORTANT**
    Before hitting enter be near the IKEA Dirigera hub as post entering IP a request to press the action button on the hub
 
 2. Once you get the screen requesting to press the action button, physically press the button once and then click on submit
 
 3. If the IP is right and action button has been pressed, then the integration will be added and all devices registered will be shown. At this time the following device types are supported
-    
    In addition you'll find the scenes added as individual entities. Go to the "Entities" to find them as they're not part of any device. Use the "Activate" button to trigger a scene.
 
 ## Testing installation with mock
+
 1. If you enter the IP as "mock" then mock bulbs and outlet will be added.
 2. Once you verify that the bulbs and outlets are added feel free to delete the integration
 
@@ -72,10 +77,8 @@ Once this is complete you would see two bulbs and two outlets appearing.
 Now I dont have access to all sensors, hence what will be useful is when you raise an issue also supply to the JSON that the hub returns.
 To get the JSON do the following
 
-* Go to Developer -> Service and invoke dirigera_platform.dump_data without any parameters
-* Look at the HASS log which would have the JSON. 
-* If you see any platform errors include that as well
+- Go to Developer -> Service and invoke dirigera_platform.dump_data without any parameters
+- Look at the HASS log which would have the JSON.
+- If you see any platform errors include that as well
 
 [Detailed Instructions](https://github.com/sanjoyg/dirigera_platform/wiki/Calling-dump_data-to-dump-the-JSON)
-
-

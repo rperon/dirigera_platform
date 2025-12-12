@@ -264,17 +264,57 @@ class ikea_open_close_sensor(ikea_base_device_sensor, BinarySensorEntity):
 class ikea_water_sensor_device(ikea_base_device):
     def __init__(self, hass, hub, json_data):
         super().__init__(hass, hub, json_data, hub.get_water_sensor_by_id)
-        self.skip_update = True 
-        
+        self.skip_update = True
+
 class ikea_water_sensor(ikea_base_device_sensor, BinarySensorEntity):
     def __init__(self, device : ikea_water_sensor_device):
         logger.debug("ikea_water_sensor ctor...")
         super().__init__(device)
-    
+
     @property
     def is_on(self):
         return self._device.water_leak_detected
-         
+
+class ikea_occupancy_sensor_device(ikea_base_device):
+    def __init__(self, hass, hub, json_data):
+        logger.debug("ikea_occupancy_sensor_device ctor...")
+        super().__init__(hass, hub, json_data, hub.get_occupancy_sensor_by_id)
+        self.skip_update = True
+
+class ikea_occupancy_sensor(ikea_base_device_sensor, BinarySensorEntity):
+    def __init__(self, device: ikea_occupancy_sensor_device):
+        logger.debug("ikea_occupancy_sensor ctor...")
+        super().__init__(device)
+
+    @property
+    def device_class(self) -> str:
+        return BinarySensorDeviceClass.OCCUPANCY
+
+    @property
+    def is_on(self):
+        return self._device.is_detected
+
+class ikea_light_sensor_device(ikea_base_device):
+    def __init__(self, hass, hub, json_data):
+        logger.debug("ikea_light_sensor_device ctor...")
+        super().__init__(hass, hub, json_data, hub.get_light_sensor_by_id)
+        self.skip_update = True
+
+class ikea_light_sensor_illuminance(ikea_base_device_sensor, SensorEntity):
+    def __init__(self, device: ikea_light_sensor_device):
+        logger.debug("ikea_light_sensor_illuminance ctor...")
+        super().__init__(
+            device,
+            id_suffix="ILLUM",
+            name="Illuminance",
+            device_class=SensorDeviceClass.ILLUMINANCE,
+            native_unit_of_measurement="lx",
+            state_class=SensorStateClass.MEASUREMENT)
+
+    @property
+    def native_value(self) -> int:
+        return self._device.illuminance
+
 class ikea_blinds_device(ikea_base_device):
     def __init__(self, hass:core.HomeAssistant, hub:Hub, blind:Blind):
         logger.debug("IkeaBlinds ctor...")

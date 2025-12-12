@@ -1,4 +1,4 @@
-"""Platform for IKEA dirigera hub integration."""
+"""Platform for IKEA dirigera hub integration 2."""
 from __future__ import annotations
 
 import asyncio
