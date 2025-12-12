@@ -312,8 +312,12 @@ class ikea_light_sensor_illuminance(ikea_base_device_sensor, SensorEntity):
             state_class=SensorStateClass.MEASUREMENT)
 
     @property
-    def native_value(self) -> int:
-        return self._device.illuminance
+    def native_value(self) -> float:
+        # MYGGSPRAY reports illuminance in millilux, convert to lux
+        raw_value = self._device.illuminance
+        if raw_value is None:
+            return None
+        return raw_value / 1000.0
 
 class ikea_blinds_device(ikea_base_device):
     def __init__(self, hass:core.HomeAssistant, hub:Hub, blind:Blind):

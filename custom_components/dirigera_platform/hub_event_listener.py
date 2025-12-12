@@ -35,7 +35,9 @@ process_events_from = {
                                 "currentRH",
                                 "currentPM25",
                                 "vocIndex",
-                                "batteryPercentage"]
+                                "batteryPercentage"],
+    "occupancySensor" :     ["isDetected","batteryPercentage"],
+    "lightSensor"     :     ["illuminance","batteryPercentage"]
 }
 
 controller_trigger_last_time_map = {}
