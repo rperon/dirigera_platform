@@ -1,0 +1,67 @@
+{
+  "config": {
+    "error": {
+      "hub_connection_fail": "Impossible de se connecter au hub IKEA Dirigera avec ces valeurs, vérifiez l'IP et le token"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "ip_address": "IP du hub",
+          "hide_device_set_bulbs": "Masquer les ampoules Device Set"
+        },
+        "description": "Entrez les informations du hub IKEA Dirigera",
+        "title": "Configuration du hub IKEA Dirigera"
+      },
+      "action": {
+        "data": {
+          "ip_address": "IP du hub",
+          "hide_device_set_bulbs": "Masquer les ampoules Device Set"
+        },
+        "description": "Appuyez sur le bouton action du hub Dirigera puis cliquez sur Soumettre.",
+        "title": "Configuration du hub IKEA Dirigera"
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "hub_connection_fail": "Impossible de se connecter au hub IKEA Dirigera avec ces valeurs, vérifiez l'IP et le token"
+    },
+    "step": {
+      "init": {
+        "title": "Plateforme du hub IKEA Dirigera",
+        "data": {
+          "ip_address": "IP du hub",
+          "token": "token",
+          "hide_device_set_bulbs": "Masquer les ampoules Device Set"
+        },
+        "description": "Mettre à jour les paramètres du hub IKEA Dirigera..."
+      },
+      "action": {
+        "data": {
+          "ip_address": "IP du hub",
+          "hide_device_set_bulbs": "Masquer les ampoules Device Set"
+        },
+        "description": "Appuyez sur le bouton action du hub Dirigera puis cliquez sur Soumettre.",
+        "title": "Configuration du hub IKEA Dirigera"
+      }
+    }
+  },
+  "exceptions": {
+    "hub_exception": {
+      "message": "Exception levée par le Hub..."
+    }
+  },
+  "device_automation": {
+    "trigger_type": {
+      "single_click": "{entity_name} Simple clic",
+      "long_press": "{entity_name} Appui long",
+      "double_click": "{entity_name} Double clic",
+      "button1_single_click": "{entity_name} Bouton 1 simple clic",
+      "button1_long_press": "{entity_name} Bouton 1 appui long",
+      "button1_double_click": "{entity_name} Bouton 1 double clic",
+      "button2_single_click": "{entity_name} Bouton 2 simple clic",
+      "button2_long_press": "{entity_name} Bouton 2 appui long",
+      "button2_double_click": "{entity_name} Bouton 2 double clic"
+    }
+  }
+}

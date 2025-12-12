@@ -1,1 +1,1 @@
-dirigera==1.2.1
+dirigera @ git+https://github.com/rperon/dirigera.git@feature/occupancy-light-sensor-MYGGSPRAY

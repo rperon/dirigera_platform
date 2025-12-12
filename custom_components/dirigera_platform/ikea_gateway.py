@@ -8,11 +8,13 @@ from .base_classes import (
     ikea_blinds_device,
     ikea_starkvind_air_purifier_device,
     ikea_outlet_device,
-    ikea_vindstyrka_device, 
+    ikea_vindstyrka_device,
     ikea_controller_device,
-    ikea_open_close_device, 
-    ikea_motion_sensor_device, 
-    ikea_water_sensor_device    
+    ikea_open_close_device,
+    ikea_motion_sensor_device,
+    ikea_water_sensor_device,
+    ikea_occupancy_sensor_device,
+    ikea_light_sensor_device
 )
 
 from dirigera.devices.scene import Trigger, TriggerDetails, EndTriggerEvent
@@ -31,6 +33,8 @@ class HubDeviceType(Enum):
     OPEN_CLOSE_SENSOR   = "open_close"
     MOTION_SENSOR       = "motion_sensor"
     WATER_SENSOR        = "water_sensor"
+    OCCUPANCY_SENSOR    = "occupancy_sensor"
+    LIGHT_SENSOR        = "light_sensor"
 
 class ikea_gateway:
     def __init__(self):
@@ -103,6 +107,16 @@ class ikea_gateway:
         logger.debug(f"Found {len(water_sensors)} total of all water_sensors devices to setup...")
         self.devices[HubDeviceType.WATER_SENSOR] = [ikea_water_sensor_device(hass, hub, x) for x in water_sensors]
 
+        #Occupancy Sensors (MYGGSPRAY)
+        occupancy_sensors = await hass.async_add_executor_job(hub.get_occupancy_sensors)
+        logger.debug(f"Found {len(occupancy_sensors)} total of all occupancy_sensors devices to setup...")
+        self.devices[HubDeviceType.OCCUPANCY_SENSOR] = [ikea_occupancy_sensor_device(hass, hub, x) for x in occupancy_sensors]
+
+        #Light Sensors (MYGGSPRAY)
+        light_sensors = await hass.async_add_executor_job(hub.get_light_sensors)
+        logger.debug(f"Found {len(light_sensors)} total of all light_sensors devices to setup...")
+        self.devices[HubDeviceType.LIGHT_SENSOR] = [ikea_light_sensor_device(hass, hub, x) for x in light_sensors]
+
     def get_devices(self, key):
         if key not in self.devices:
             self.devices[key]=[]
@@ -151,3 +165,11 @@ class ikea_gateway:
     @property
     def water_sensors(self):
         return self.get_devices(HubDeviceType.WATER_SENSOR)
+
+    @property
+    def occupancy_sensors(self):
+        return self.get_devices(HubDeviceType.OCCUPANCY_SENSOR)
+
+    @property
+    def light_sensors(self):
+        return self.get_devices(HubDeviceType.LIGHT_SENSOR)

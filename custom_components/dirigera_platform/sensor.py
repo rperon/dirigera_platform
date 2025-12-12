@@ -10,14 +10,14 @@ from .base_classes import (
     ikea_vindstyrka_voc_index,
     WhichPM25,
     ikea_starkvind_air_purifier_sensor,
-    current_amps_sensor ,
+    current_amps_sensor,
     current_active_power_sensor,
     current_voltage_sensor,
     total_energy_consumed_sensor,
-    energy_consumed_at_last_reset_sensor ,
+    energy_consumed_at_last_reset_sensor,
     total_energy_consumed_last_updated_sensor,
-    total_energy_consumed_sensor,
-    time_of_last_energy_reset_sensor
+    time_of_last_energy_reset_sensor,
+    ikea_light_sensor_illuminance
 )
 from .ikea_gateway import ikea_gateway
 
@@ -60,12 +60,26 @@ async def async_setup_entry(
     battery_sensors.extend([battery_percentage_sensor(x) for x in platform.water_sensors])
     battery_sensors.extend([battery_percentage_sensor(x) for x in platform.environment_sensors if getattr(x,"battery_percentage",None) is not None])
     battery_sensors.extend([battery_percentage_sensor(x) for x in platform.blinds if getattr(x,"battery_percentage",None) is not None])
+    battery_sensors.extend([battery_percentage_sensor(x) for x in platform.occupancy_sensors if getattr(x,"battery_percentage",None) is not None])
+    battery_sensors.extend([battery_percentage_sensor(x) for x in platform.light_sensors if getattr(x,"battery_percentage",None) is not None])
 
     logger.debug(f"Found {len(battery_sensors)} battery sensors...")
     async_add_entities(battery_sensors)
 
+    # Add light sensor illuminance entities (MYGGSPRAY)
+    await add_light_sensors(async_add_entities, platform.light_sensors)
+
     await add_air_purifier_sensors(async_add_entities, platform.air_purifiers)
     logger.debug("sensor Complete async_setup_entry")
+
+async def add_light_sensors(async_add_entities, light_sensor_devices):
+    light_sensors = []
+    for light_sensor_device in light_sensor_devices:
+        if getattr(light_sensor_device, "illuminance", None) is not None:
+            light_sensors.append(ikea_light_sensor_illuminance(light_sensor_device))
+
+    logger.debug(f"Found {len(light_sensors)} light sensor entities to setup...")
+    async_add_entities(light_sensors)
 
 async def add_environment_sensors(async_add_entities, env_devices):
     env_sensors = []
